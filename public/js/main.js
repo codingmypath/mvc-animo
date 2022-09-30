@@ -1,0 +1,268 @@
+// const deleteBtn = document.querySelectorAll('.del')
+// const todoItem = document.querySelectorAll('span.not')
+// const todoComplete = document.querySelectorAll('span.completed')
+
+// Array.from(deleteBtn).forEach((el)=>{
+//     el.addEventListener('click', deleteTodo)
+// })
+
+// Array.from(todoItem).forEach((el)=>{
+//     el.addEventListener('click', markComplete)
+// })
+
+// Array.from(todoComplete).forEach((el)=>{
+//     el.addEventListener('click', markIncomplete)
+// })
+
+// async function deleteTodo(){
+//     const todoId = this.parentNode.dataset.id
+//     try{
+//         const response = await fetch('todos/deleteTodo', {
+//             method: 'delete',
+//             headers: {'Content-type': 'application/json'},
+//             body: JSON.stringify({
+//                 'todoIdFromJSFile': todoId
+//             })
+//         })
+//         const data = await response.json()
+//         console.log(data)
+//         location.reload()
+//     }catch(err){
+//         console.log(err)
+//     }
+// }
+
+// async function markComplete(){
+//     const todoId = this.parentNode.dataset.id
+//     try{
+//         const response = await fetch('todos/markComplete', {
+//             method: 'put',
+//             headers: {'Content-type': 'application/json'},
+//             body: JSON.stringify({
+//                 'todoIdFromJSFile': todoId
+//             })
+//         })
+//         const data = await response.json()
+//         console.log(data)
+//         location.reload()
+//     }catch(err){
+//         console.log(err)
+//     }
+// }
+
+// async function markIncomplete(){
+//     const todoId = this.parentNode.dataset.id
+//     try{
+//         const response = await fetch('todos/markIncomplete', {
+//             method: 'put',
+//             headers: {'Content-type': 'application/json'},
+//             body: JSON.stringify({
+//                 'todoIdFromJSFile': todoId
+//             })
+//         })
+//         const data = await response.json()
+//         console.log(data)
+//         location.reload()
+//     }catch(err){
+//         console.log(err)
+//     }
+// }
+
+
+
+//Calendar
+
+let nav = 0;
+let clicked = null;
+let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+
+const calendar = document.querySelector('.calendar');
+const newEventModal = document.getElementById('newEventModal');
+const deleteEventModal = document.getElementById('deleteEventModal');
+const backDrop = document.getElementById('modalBackDrop');
+const eventTitleInput = document.getElementById('eventTitleInput')
+// const mood = document.querySelector('input[name="mood"]:checked')
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const deleteBtn = document.querySelector('.del')
+
+
+function openModal(date) {
+    clicked = date;
+
+    let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
+    const eventForDay = events.find(e => e.date === clicked);
+
+    if (eventForDay) {
+        console.log('Event already exists');
+        document.getElementById('eventText').innerText = eventForDay.title;
+        deleteEventModal.style.display = 'block';
+    } else {
+        console.log('ADD')
+        newEventModal.style.display = 'block';
+        // window.location.href="questions.html" //to go to new page
+    }
+    backDrop.style.display = 'block';
+}
+
+function page() {
+    const today = new Date();
+    console.log(today)
+
+    if (nav !== 0) {
+        today.setMonth(new Date().getMonth() + nav);
+    }
+
+    const month = today.getMonth()
+    const day = today.getDate()
+    const year = today.getFullYear()
+
+    const firstOfMonth = new Date(year, month, 1);
+    const fullDaysInMonth = new Date(year, month + 1, 0).getDate();
+
+
+    const dateString = firstOfMonth.toLocaleDateString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    });
+    const paddingDays = weekdays.indexOf(dateString.split(',')[0]);
+    
+    document.querySelector('.month').innerText = `${today.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
+
+    calendar.innerHTML = '';
+
+    for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) {
+        const daySquare = document.createElement('div');
+        daySquare.classList.add('day');
+
+        const dayString = `${month + 1}/${i - paddingDays}/${year}`;
+        // Squares with links
+        // const daySquare = document.createElement('a');
+        // daySquare.classList.add('day');
+        // daySquare.href = "https://twitter.com";
+
+
+        if ( i > paddingDays) {
+            daySquare.innerText = i - paddingDays;
+            const eventForDay = events.find(e => e.date === dayString);
+
+            if (i - paddingDays === day && nav === 0) {
+                daySquare.id = 'currentDay';
+            }
+
+            if (eventForDay) {
+                const eventDiv = document.createElement('div');
+                eventDiv.classList.add('event');
+                eventDiv.innerText = eventForDay.title;
+                daySquare.appendChild(eventDiv);
+            }
+
+            daySquare.addEventListener('click', () => openModal(dayString))
+        } else {
+            daySquare.classList.add('padding');
+        }
+
+        calendar.appendChild(daySquare)
+    }
+}
+
+function closeModal() {
+    eventTitleInput.classList.remove('error')
+    newEventModal.style.display ='none';
+    deleteEventModal.style.display ='none';
+    backDrop.style.display = 'none';
+    // eventTitleInput.value = ''; // Was not submitting title to MongoDB with this line
+    clicked = null;
+    page();
+}
+
+function saveEvent() {
+    if (eventTitleInput.value) {
+        eventTitleInput.classList.remove('error')
+
+        events.push({
+            title: eventTitleInput.value,
+            date: clicked,
+            mood: document.querySelector('input[name="mood"]:checked').value
+        })
+
+        localStorage.setItem('events', JSON.stringify(events))
+        closeModal()
+    } else {
+        eventTitleInput.classList.add('error')
+    }
+}
+
+//Delete function to delete a journal entry
+function deleteEvent() {
+    //Deletes from local storage
+    events = events.filter(e => e.date !== clicked);
+    localStorage.setItem('events', JSON.stringify(events));
+
+    console.log("deleteEvent")
+    // Array.from(deleteBtn).forEach((el)=>{
+    //     el.addEventListener('click', deleteEventOne)
+    // })
+    deleteEventOne()
+
+    // deleteBtn.addEventListener('click', deleteEventOne)
+    
+    
+    async function deleteEventOne(){
+        console.log('deleteEvent working')
+        const EventId = events
+        try{
+            const response = await fetch('events/deleteEvent', {
+                method: 'delete',
+                headers: {'Content-type': 'application/json'},
+                body: JSON.stringify({
+                    'eventIdFromJSFile': EventId
+                })
+            })
+            const data = await response.json()
+            console.log(data)
+            // location.reload()
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    closeModal();
+
+}
+
+function initButtons() {
+    document.getElementById('back-month').addEventListener('click', () => {
+        nav--;
+        page();
+    })
+
+    document.getElementById('forward-month').addEventListener('click', () => {
+        nav++;
+        page();
+    })
+
+    document.getElementById('saveButton').addEventListener('click', saveEvent)
+    document.getElementById('cancelButton').addEventListener('click', closeModal)
+
+    document.getElementById('deleteButton').addEventListener('click', deleteEvent)
+    document.getElementById('closeButton').addEventListener('click', closeModal)
+
+    
+}
+
+page()
+initButtons()
+
+
+
+
+// //Calendar form
+// let form = document.getElementById('form');
+// form.addEventListener('submit', showMessage);
+
+// function showMessage(event) {
+//   alert("Your response has been recorded. (Not actually, this is just a demo!)");
+//   event.preventDefault();
+// }

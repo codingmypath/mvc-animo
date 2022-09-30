@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Animo - Home</title>
+</head>
+<body class="calendar-body">
+    <section class="container">
+        <section class="months">
+            <a id="back-month" class="fa-solid fa-angle-left"></a>
+            <div class="month"></div>
+            <a id="forward-month" class="fa-solid fa-angle-right"></a>
+        </section>
+
+        <ul class="weekdays">
+            <li>Sunday</li>
+            <li>Monday</li>
+            <li>Tuesday</li>
+            <li>Wednesday</li>
+            <li>Thursday</li>
+            <li>Friday</li>
+            <li>Saturday</li>
+        </ul>
+
+        <section class="calendar"></section>
+        <a href="/logout">Logout</a>
+    </section>
+    
+    <form id="newEventModal" action="/events/createEvent" method='POST'>
+        <h2>Journal Entry</h2>
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="eventTitleInput" placeholder="Title info" required>
+        </div>
+        <h3>How was your day?</h3>
+        <input id="mood" type="radio" name="mood" value="good" required> Good
+        <input id="mood" type="radio" name="mood" value="meh"> Meh
+        <input id="mood" type="radio" name="mood" value="bad"> Bad
+        <h3>What happened today?</h3>
+        <textarea id="description" placeholder="Today.." name="description" rows="0" cols="0" required="required"></textarea><br>
+        <button type="submit" id="saveButton">Submit</button>
+        <input type="button" id="cancelButton" clas="del" value="Cancel">
+    </form>
+    <div id="deleteEventModal">
+        <h2>Event</h2>
+        <p id="eventText"></p>
+        <button id="deleteButton" class="del">Delete</button>
+        <button type="button" id="closeButton">Close</button>
+    </div> 
+    <div id="modalBackDrop"></div>
+
+    <footer>
+        <!-- <a class="footer-links" href="calendar.html">Home</a> -->
+        <a class="footer-links" href="/events"><img class="animo" src="../images/animo-butterfly1.png"></a>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+
+body {
+    margin: 0;
+    background-image: linear-gradient(
+        rgba(1, 44, 75, 0.85), 
+        rgba(1, 44, 90, 0.85)
+    ),
+    url('../images/test.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font-family: sans-serif;
+}
+
+.container {
+    background: linear-gradient(
+        rgba(1, 44, 75, 0.55), 
+        rgba(90, 90, 90, 0.15)
+    ),
+    #00171F;
+}
+
+.login-page {
+    margin: 500px;
+    max-width: 500px;
+    text-align: center;
+    /* background: rgb(66, 65, 65); */
+    margin: 200px auto;
+    color: white;
+    height: 450px;
+    background: linear-gradient(
+        rgba(1, 44, 75, 0.55), 
+        rgba(90, 90, 90, 0.15)
+    ),
+    #00171F;
+}
+
+.logo {
+    padding: 2rem;
+    padding-bottom: 0.5rem;
+    height: 8rem;
+    width: 12rem;
+}
+
+h1 {
+    margin: 0;
+    margin-bottom: 2rem;
+}
+
+.inside-info {
+    margin: 20px;
+}
+
+.link {
+    margin: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.link:hover {
+    color: lightblue;
+}
+
+.login-input {
+    margin: auto;
+    width: 300px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+input {
+    font-size: 1rem;
+    flex-shrink: 3;
+    gap: 10px;
+}
+
+.input {
+    color: white;
+    border: 1px solid rgba(92, 92, 92, 0.562);
+    background: linear-gradient(
+        rgba(4, 64, 107, 0.55), 
+        rgba(4, 64, 107, 0.55)
+    ),
+    #005470;
+    padding: 5px;
+}
+
+.submit-button {
+    background: #00A8E8;
+    border: none;
+    /* border-radius: 50px; */
+    padding: 5px;
+    margin: 2px 0;
+    cursor: pointer;
+}
+
+.signup-button {
+    margin: 20px;
+}
+
+.signup {
+    color: white;
+    text-decoration: none;
+}
+
+.link-signup {
+    background:#00A8E8;
+    color: white;
+}
+
+/* Home */
+.calendar-body {
+    display: flex;
+    justify-content: center;
+}
+.container {
+    max-width: 800px;
+    margin: auto;
+    color: white;
+}
+
+.month {
+    text-align: center;
+    font-size: 2rem;
+    padding: 0 20px;
+}
+
+.months {
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+}
+
+.months a {
+    cursor: pointer;
+    /* padding: 0 20px; */
+    border: none;
+    color: white;
+    /* background:#00A8E8; */
+    margin: 0;
+    padding-top: 12px;
+}
+.weekdays {
+    display: flex;
+    padding: 0px;
+    justify-content: center;
+}
+
+.weekdays li {
+    width: 100%;
+    text-align: center
+    /* padding: 0 15px; */
+}
+li {
+    width: 120px;
+    flex: 1;
+    list-style: none;
+    text-align: center;
+}
+
+.calendar {
+    display: flex;
+    flex-wrap: wrap;
+}
+.day {
+    color: white;
+    text-decoration: none;
+    height: 110px;
+    width: 100px;
+    border: 1px solid white;
+    padding: 5px;
+    display: flex;
+    cursor: pointer;
+    border-radius: 5%;
+    margin: 1px;
+}
+
+.day:hover {
+    background: grey;
+}
+
+/* Random Quote */
+.quote {
+    padding: 1rem;
+    color: white;
+    margin: auto;
+    text-align: center;
+    max-width: 725px;
+    background: linear-gradient(
+        rgba(1, 44, 75, 0.55), 
+        rgba(90, 90, 90, 0.15)
+    ),
+    #00171F;
+}
+
+.author {
+    text-align: right;
+}
+
+
+/* Footer */
+footer {
+    position: fixed;
+    background: linear-gradient(
+        rgba(1, 44, 75, 0.55), 
+        rgba(90, 90, 90, 0.15)
+    ),
+    #00171F;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.footer-links {
+    text-decoration: none;
+    color: white;
+    margin: 15px;
+    height: 50%;
+}
+
+.animo {
+    height: 55px;
+    width: 55px;
+    border-radius: 10px;
+}
+
+
+
+/* Add to days */
+#modalBackDrop {
+    position: absolute;
+    background: rgb(0, 0, 0, 0.70);
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+#newEventModal {
+    margin-top: 45px;
+    position: absolute;
+    background: rgb(255, 255, 255);
+    width: 550px;
+    height: 500px;
+    display: none;
+    z-index: 1;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+#deleteEventModal {
+    margin-top: 45px;
+    position: absolute;
+    background: rgb(255, 255, 255);
+    width: 550px;
+    height: 500px;
+    display: none;
+    z-index: 1;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#currentDay {
+    border: 2.5px solid rgb(0, 195, 255);
+}
+
+.event {
+    margin-top: 50px;
+    background: rgb(195, 0, 255);
+    width: 100%;
+    padding-top: 10px;
+    /* padding: 20px 20px; */
+    text-align: center;
+    border-radius: 2px;
+}
