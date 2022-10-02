@@ -1,3 +1,4 @@
+// From the todo Example
 // const deleteBtn = document.querySelectorAll('.del')
 // const todoItem = document.querySelectorAll('span.not')
 // const todoComplete = document.querySelectorAll('span.completed')
@@ -85,7 +86,25 @@ const eventTitleInput = document.getElementById('eventTitleInput')
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const deleteBtn = document.querySelector('.del')
 
+//Testing this out for pop up box
+const dayPop = document.querySelectorAll('.day')
 
+dayPop.forEach(box => box.addEventListener('click', () => {
+
+    let dayBoxDate = box.className.split(' ').filter(x => Number(x) || x == '0').toString()
+    console.log("dayBoxDate =" + dayBoxDate)
+    // define the date from the box's id ('date_' + YYYY-MM-DD)
+    let idBoxClicked = box.id.slice(5)
+    console.log("idBoxClicked =" + idBoxClicked)
+    // set the value of date picker to the date clicked
+    setDate.setAttribute('value', idBoxClicked);
+    
+    openModal()
+
+}))
+
+
+// Opens the journal entry questionaire
 function openModal(date) {
     clicked = date;
 
@@ -104,69 +123,96 @@ function openModal(date) {
     backDrop.style.display = 'block';
 }
 
-function page() {
-    const today = new Date();
-    console.log(today)
-
-    if (nav !== 0) {
-        today.setMonth(new Date().getMonth() + nav);
-    }
-
-    const month = today.getMonth()
-    const day = today.getDate()
-    const year = today.getFullYear()
-
-    const firstOfMonth = new Date(year, month, 1);
-    const fullDaysInMonth = new Date(year, month + 1, 0).getDate();
 
 
-    const dateString = firstOfMonth.toLocaleDateString('en-us', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-    });
-    const paddingDays = weekdays.indexOf(dateString.split(',')[0]);
+//Loads the page with the month
+// function page() {
+//     const today = new Date();
+//     console.log(today)
+
+//     if (nav !== 0) {
+//         today.setMonth(new Date().getMonth() + nav);
+//     }
+
+//     const month = today.getMonth()  //Gives you the month number
+//     const day = today.getDate() //Gives you the day number
+//     const year = today.getFullYear()    //Gives you the year 
+
+//     const firstOfMonth = new Date(year, month, 1);  //Gives you the date. Ex: Sat Oct 01 2022 00:00:00 GMT-0700
+//     const fullDaysInMonth = new Date(year, month + 1, 0).getDate(); //Gives you the number of days in the month
+
+//     // Gives you the day and date. Ex: Saturday, 10/1/2022
+//     const dateString = firstOfMonth.toLocaleDateString('en-us', {
+//         weekday: 'long',
+//         year: 'numeric',
+//         month: 'numeric',
+//         day: 'numeric',
+//     });
     
-    document.querySelector('.month').innerText = `${today.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
 
-    calendar.innerHTML = '';
+//     // Code test:
+//     // let idsDaysOfYear = []; 
+//     // idsDaysOfYear.push(`${year}-${month + 1}-${day}`);
 
-    for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) {
-        const daySquare = document.createElement('div');
-        daySquare.classList.add('day');
+//     //Gives you the amount of days before the first day of the month on the first week
+//     const paddingDays = weekdays.indexOf(dateString.split(',')[0]);   
+    
+//     document.querySelector('.month').innerText = `${today.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
 
-        const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-        // Squares with links
-        // const daySquare = document.createElement('a');
-        // daySquare.classList.add('day');
-        // daySquare.href = "https://twitter.com";
+//     calendar.innerHTML = '';
+
+//     for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) {
+//         const daySquare = document.createElement('div');
+//         daySquare.classList.add('day');
+
+//         //dayString = xx/x/xxxx | Example: 10/-5/2022 and it goes up from there to 10/31/2022
+//         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
+
+//         if ( i > paddingDays) {
+//              daySquare.innerText = i - paddingDays;
+//              //eventForDay = today's date | Ex: 2002-10-1
+//              const eventForDay = events.find(e => e.date === dayString);
+//              console.log("eventForDay = "  + eventForDay)
+
+//             if (i - paddingDays === day && nav === 0) {
+//                  daySquare.id = 'currentDay';
+//             }
+
+//             if (eventForDay) {
+//                  const eventDiv = document.createElement('div');
+//                  eventDiv.classList.add('event');
+//                  eventDiv.innerText = eventForDay.title;
+//                  daySquare.appendChild(eventDiv);
+//             }
+
+//             daySquare.addEventListener('click', () => openModal(dayString))
+
+//         } else {
+//               daySquare.classList.add('padding');
+//         }
+
+//          calendar.appendChild(daySquare)
+//         }
+
+// }
 
 
-        if ( i > paddingDays) {
-            daySquare.innerText = i - paddingDays;
-            const eventForDay = events.find(e => e.date === dayString);
+const today = new Date();
+const month = today.getMonth()  //Gives you the month number
+const day = today.getDate() //Gives you the day number
+const year = today.getFullYear()    //Gives you the year 
 
-            if (i - paddingDays === day && nav === 0) {
-                daySquare.id = 'currentDay';
-            }
+let formatDate = `${year}-${month + 1}-${day}`
+console.log(formatDate);
 
-            if (eventForDay) {
-                const eventDiv = document.createElement('div');
-                eventDiv.classList.add('event');
-                eventDiv.innerText = eventForDay.title;
-                daySquare.appendChild(eventDiv);
-            }
+//Date value
+const setDate = document.querySelector('#date')
+setDate.setAttribute('max', formatDate);
+setDate.setAttribute('value', formatDate);
 
-            daySquare.addEventListener('click', () => openModal(dayString))
-        } else {
-            daySquare.classList.add('padding');
-        }
 
-        calendar.appendChild(daySquare)
-    }
-}
 
+//Closes the journal entry questionaire 
 function closeModal() {
     eventTitleInput.classList.remove('error')
     newEventModal.style.display ='none';
@@ -174,64 +220,64 @@ function closeModal() {
     backDrop.style.display = 'none';
     // eventTitleInput.value = ''; // Was not submitting title to MongoDB with this line
     clicked = null;
-    page();
+    // page();
 }
 
 function saveEvent() {
+
+    //Saves to local storage
     if (eventTitleInput.value) {
         eventTitleInput.classList.remove('error')
+        // events.push({
+        //     title: eventTitleInput.value,
+        //     date: clicked,
+        //     mood: document.querySelector('input[name="mood"]:checked').value
+        // })
 
-        events.push({
-            title: eventTitleInput.value,
-            date: clicked,
-            mood: document.querySelector('input[name="mood"]:checked').value
-        })
-
-        localStorage.setItem('events', JSON.stringify(events))
+        // localStorage.setItem('events', JSON.stringify(events))
         closeModal()
     } else {
         eventTitleInput.classList.add('error')
     }
 }
 
+
 //Delete function to delete a journal entry
 function deleteEvent() {
     //Deletes from local storage
-    events = events.filter(e => e.date !== clicked);
-    localStorage.setItem('events', JSON.stringify(events));
+    // events = events.filter(e => e.date !== clicked);
+    // localStorage.setItem('events', JSON.stringify(events));
 
     console.log("deleteEvent")
-    // Array.from(deleteBtn).forEach((el)=>{
-    //     el.addEventListener('click', deleteEventOne)
-    // })
-    deleteEventOne()
 
-    // deleteBtn.addEventListener('click', deleteEventOne)
-    
-    
-    async function deleteEventOne(){
-        console.log('deleteEvent working')
-        const EventId = events
+
+    async function deleteEvent(){
+            const todoId = this.parentNode.date.value
         try{
             const response = await fetch('events/deleteEvent', {
                 method: 'delete',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({
-                    'eventIdFromJSFile': EventId
+                    'todoIdFromJSFile': todoId
+                    // date: setDate.value
                 })
             })
             const data = await response.json()
             console.log(data)
-            // location.reload()
+            location.reload()
         }catch(err){
             console.log(err)
         }
     }
 
-    closeModal();
+    deleteEvent()
 
+    //Closes the box after deleting journal entry
+    closeModal();
 }
 
+
+// click buttons
 function initButtons() {
     document.getElementById('back-month').addEventListener('click', () => {
         nav--;
@@ -252,10 +298,8 @@ function initButtons() {
     
 }
 
-page()
+// page()
 initButtons()
-
-
 
 
 // //Calendar form
@@ -266,3 +310,23 @@ initButtons()
 //   alert("Your response has been recorded. (Not actually, this is just a demo!)");
 //   event.preventDefault();
 // }
+
+
+function fetchData() {
+    fetch('/events/createEvent')
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(entry => {
+            // Add a class to day to change color depending on mood
+            if(entry.mood === 'good') {
+                document.querySelector(`#date_${entry.date}`).classList.add('good');
+            } else if(entry.mood === 'meh') {
+                document.querySelector(`#date_${entry.date}`).classList.add('meh');
+            } else if(entry.mood === 'bad') {
+                document.querySelector(`#date_${entry.date}`).classList.add('bad');
+            }
+        })
+    })
+}
+
+fetchData()

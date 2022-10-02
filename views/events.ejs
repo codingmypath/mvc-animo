@@ -9,10 +9,81 @@
     <title>Animo - Home</title>
 </head>
 <body class="calendar-body">
+    <% let nav = 0; %>
+    <% let clicked = null; %>
+
+    <% const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
+
+
+    <% const today = new Date(); %>
+    <% console.log(today) %>
+
+    <% if (nav !== 0) { %>
+        <% today.setMonth(new Date().getMonth() + nav); %>
+    <% } %>
+
+    <% const month = today.getMonth() %>
+    <% const day = today.getDate() %>
+    <% const year = today.getFullYear() %>
+
+    <% const firstOfMonth = new Date(year, month, 1); %>
+    <% const fullDaysInMonth = new Date(year, month + 1, 0).getDate(); %>
+
+
+    <% const dateString = firstOfMonth.toLocaleDateString('en-us', {
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'numeric', 
+        day: 'numeric', 
+    }); 
+    %>
+    
+    <% const paddingDays = weekdays.indexOf(dateString.split(',')[0]); %>
+
+
+    <% let dayStringTest = [] %>
+    <% for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) { %>
+        <%# const daySquare = document.createElement('div'); %>
+        <%# daySquare.classList.add('day'); %>
+
+        <% const dayString = `${month + 1}/${i - paddingDays}/${year}`; %>
+
+    
+         <% dayStringTest.push(`${year}-${month + 1}-${i - paddingDays}`); %>
+
+        <%# if ( i > paddingDays) { %>
+            <%# daySquare.innerText = i - paddingDays; %>
+            <%# const eventForDay = events.find(e => e.date === dayString); %>
+
+            <%# if (i - paddingDays === day && nav === 0) { %>
+                <%# daySquare.id = 'currentDay'; %>
+        <%# } %>
+
+        <%# if (eventForDay) { %>
+                <%# const eventDiv = document.createElement('div'); %>
+                <%# eventDiv.classList.add('event'); %>
+                <%# eventDiv.innerText = eventForDay.title; %>
+                <%# daySquare.appendChild(eventDiv); %>
+        <% } %>
+
+                <%# daySquare.addEventListener('click', () => openModal(dayString)) %>
+            <%# } else { %>
+                        <%# daySquare.classList.add('padding'); %>
+                        <%# } %>
+
+                        <%# calendar.appendChild(daySquare) %>
+                    <%# } %>
+
+        <%# let formatDate = `${year}-${month + 1}-${day}` %>
+        <%# console.log(formatDate); %>
+            
+            
+
+
     <section class="container">
         <section class="months">
             <a id="back-month" class="fa-solid fa-angle-left"></a>
-            <div class="month"></div>
+            <div class="month"><%= `${today.toLocaleDateString('en-us', {month: 'long'})} ${year}` %></div>
             <a id="forward-month" class="fa-solid fa-angle-right"></a>
         </section>
 
@@ -27,11 +98,26 @@
         </ul>
 
         <section class="calendar"></section>
+        <div class="calendar">
+            <% for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) { %>
+                <% if ( i > paddingDays) { %>
+                    <div id="<%= 'date_' + dayStringTest[i - 1] %>" class="<%= `${i - paddingDays} day` %>"><%= i - paddingDays %></div>
+                    <%# Highlight Current Day %>
+                    <% if (i - paddingDays === day && nav === 0) { %>
+                        <!-- <div class="<%= `day` %>" id="currentDay"></div> -->
+                    <% } %>
+                    <% } else { %>
+                    <div class="<%= `day padding` %>"></div>
+                <% } %>
+            <% } %> 
+        </div>
+        
         <a href="/logout">Logout</a>
     </section>
     
     <form id="newEventModal" action="/events/createEvent" method='POST'>
         <h2>Journal Entry</h2>
+        <input id="date" class="block" type="date" value="" name="date" min="2022-01-01" max="" required>
         <div>
             <label for="title">Title</label>
             <input type="text" name="title" id="eventTitleInput" placeholder="Title info" required>
@@ -43,6 +129,7 @@
         <h3>What happened today?</h3>
         <textarea id="description" placeholder="Today.." name="description" rows="0" cols="0" required="required"></textarea><br>
         <button type="submit" id="saveButton">Submit</button>
+        <button id="deleteButton" class="del">Delete</button>
         <input type="button" id="cancelButton" clas="del" value="Cancel">
     </form>
     <div id="deleteEventModal">

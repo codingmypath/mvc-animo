@@ -2,11 +2,10 @@ const Event = require('../models/Event')
 
 module.exports = {
     getEvents: async (req,res) => {
-        console.log(req.user)
         try{
-            const todoItems = await Event.find({userId:req.user.id})
-
-            res.render('events.ejs', {title: todoItems, user: req.user})
+            const eventItems = await Event.find({userId:req.user.id})
+            console.log("eventItems = " + eventItems)
+            res.render('events.ejs', {events: eventItems})
         }catch(err){
             console.log(err)
         }
@@ -14,6 +13,7 @@ module.exports = {
     createEvent: async (req, res)=>{
         try{
             await Event.create({
+                date: req.body.date,
                 title: req.body.title,
                 mood: req.body.mood, 
                 description: req.body.description, 
@@ -27,10 +27,9 @@ module.exports = {
         }
     },
     deleteEvent: async (req, res)=>{
-        console.log(req.body.eventIdFromJSFile)
         try{
             console.log(req.body.eventIdFromJSFile)
-            await Todo.findOneAndDelete({_id:req.body.eventIdFromJSFile})
+            await Event.findOneAndDelete({date: req.body.date})
             console.log('Deleted Event')
             res.json('Deleted It')
         }catch(err){
@@ -39,4 +38,6 @@ module.exports = {
     }
 
 }    
+
+
 

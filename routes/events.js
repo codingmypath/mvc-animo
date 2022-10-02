@@ -7,6 +7,6 @@ router.get('/', ensureAuth, eventsController.getEvents)
 
 router.post('/createEvent', eventsController.createEvent)
 
-router.delete('/deleteTodo', eventsController.deleteEvent)
+router.delete('/deleteEvent', eventsController.deleteEvent)
 
 module.exports = router
