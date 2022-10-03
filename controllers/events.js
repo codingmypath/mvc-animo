@@ -3,8 +3,8 @@ const Event = require('../models/Event')
 module.exports = {
     getEvents: async (req,res) => {
         try{
-            const eventItems = await Event.find({userId:req.user.id})
-            console.log("eventItems = " + eventItems)
+            const eventItems = await [].concat(Event.find())
+            console.log("Results = " + eventItems)
             res.render('events.ejs', {events: eventItems})
         }catch(err){
             console.log(err)
@@ -28,7 +28,7 @@ module.exports = {
     },
     deleteEvent: async (req, res)=>{
         try{
-            console.log(req.body.eventIdFromJSFile)
+            console.log(req.body.eventId)
             await Event.findOneAndDelete({date: req.body.date})
             console.log('Deleted Event')
             res.json('Deleted It')

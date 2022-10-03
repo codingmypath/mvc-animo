@@ -90,15 +90,11 @@ const deleteBtn = document.querySelector('.del')
 const dayPop = document.querySelectorAll('.day')
 
 dayPop.forEach(box => box.addEventListener('click', () => {
-
-    let dayBoxDate = box.className.split(' ').filter(x => Number(x) || x == '0').toString()
-    console.log("dayBoxDate =" + dayBoxDate)
-    // define the date from the box's id ('date_' + YYYY-MM-DD)
-    let idBoxClicked = box.id.slice(5)
-    console.log("idBoxClicked =" + idBoxClicked)
+    // The date from the box's id | Ex'date_' + YYYY-MM-DD
+    let idSquareClicked = box.id.slice(5)
+    console.log("idSquareClicked =" + idSquareClicked)
     // set the value of date picker to the date clicked
-    setDate.setAttribute('value', idBoxClicked);
-    
+    setDate.setAttribute('value', idSquareClicked);
     openModal()
 
 }))
@@ -199,7 +195,10 @@ function openModal(date) {
 
 const today = new Date();
 const month = today.getMonth()  //Gives you the month number
-const day = today.getDate() //Gives you the day number
+let day = today.getDate() //Gives you the day number
+if (day < 10) {
+    day = ('0' + day).slice(-2) 
+}
 const year = today.getFullYear()    //Gives you the year 
 
 let formatDate = `${year}-${month + 1}-${day}`
@@ -244,22 +243,22 @@ function saveEvent() {
 
 //Delete function to delete a journal entry
 function deleteEvent() {
-    //Deletes from local storage
+    //Deletes journal entry that was clicked on from local storage
     // events = events.filter(e => e.date !== clicked);
     // localStorage.setItem('events', JSON.stringify(events));
 
     console.log("deleteEvent")
 
-
-    async function deleteEvent(){
-            const todoId = this.parentNode.date.value
+    async function deleteEventOne(){
+        // const todoId = this.parentNode.dataset.id
+            // const eventId = this.parentNode.dataset.date
+            // console.log(eventId)
         try{
-            const response = await fetch('events/deleteEvent', {
+            const response = await fetch('/events/deleteEvent', {
                 method: 'delete',
                 headers: {'Content-type': 'application/json'},
-                body: JSON.stringify({
-                    'todoIdFromJSFile': todoId
-                    // date: setDate.value
+                body: JSON.stringify({ 
+                    date: setDate.value
                 })
             })
             const data = await response.json()
@@ -270,7 +269,7 @@ function deleteEvent() {
         }
     }
 
-    deleteEvent()
+    deleteEventOne()
 
     //Closes the box after deleting journal entry
     closeModal();
@@ -312,21 +311,21 @@ initButtons()
 // }
 
 
-function fetchData() {
-    fetch('/events/createEvent')
-    .then(res => res.json())
-    .then(data => {
-        data.forEach(entry => {
-            // Add a class to day to change color depending on mood
-            if(entry.mood === 'good') {
-                document.querySelector(`#date_${entry.date}`).classList.add('good');
-            } else if(entry.mood === 'meh') {
-                document.querySelector(`#date_${entry.date}`).classList.add('meh');
-            } else if(entry.mood === 'bad') {
-                document.querySelector(`#date_${entry.date}`).classList.add('bad');
-            }
-        })
-    })
-}
+// function fetchData() {
+//     fetch('/')
+//     .then(res => res.json())
+//     .then(data => {
+//         data.forEach(entry => {
+//             // Add a class to to change color depending on the selected mood
+//             if(entry.mood === 'good') {
+//                 document.querySelector(`#date_${entry.date}`).classList.add('good');
+//             } else if(entry.mood === 'meh') {
+//                 document.querySelector(`#date_${entry.date}`).classList.add('meh');
+//             } else if(entry.mood === 'bad') {
+//                 document.querySelector(`#date_${entry.date}`).classList.add('bad');
+//             }
+//         })
+//     })
+// }
 
-fetchData()
+// fetchData()
