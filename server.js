@@ -40,6 +40,7 @@ app.use(flash())
   
 app.use('/', mainRoutes)
 app.use('/events', eventRoutes)
+// app.use('/changeUp', eventRoutes)
  
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')

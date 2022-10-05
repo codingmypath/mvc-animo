@@ -9,4 +9,6 @@ router.post('/createEvent', eventsController.createEvent)
 
 router.delete('/deleteEvent', eventsController.deleteEvent)
 
+// router.post('/changeUp', eventsController.changeEvent)
+
 module.exports = router

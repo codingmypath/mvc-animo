@@ -1,76 +1,3 @@
-// From the todo Example
-// const deleteBtn = document.querySelectorAll('.del')
-// const todoItem = document.querySelectorAll('span.not')
-// const todoComplete = document.querySelectorAll('span.completed')
-
-// Array.from(deleteBtn).forEach((el)=>{
-//     el.addEventListener('click', deleteTodo)
-// })
-
-// Array.from(todoItem).forEach((el)=>{
-//     el.addEventListener('click', markComplete)
-// })
-
-// Array.from(todoComplete).forEach((el)=>{
-//     el.addEventListener('click', markIncomplete)
-// })
-
-// async function deleteTodo(){
-//     const todoId = this.parentNode.dataset.id
-//     try{
-//         const response = await fetch('todos/deleteTodo', {
-//             method: 'delete',
-//             headers: {'Content-type': 'application/json'},
-//             body: JSON.stringify({
-//                 'todoIdFromJSFile': todoId
-//             })
-//         })
-//         const data = await response.json()
-//         console.log(data)
-//         location.reload()
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
-
-// async function markComplete(){
-//     const todoId = this.parentNode.dataset.id
-//     try{
-//         const response = await fetch('todos/markComplete', {
-//             method: 'put',
-//             headers: {'Content-type': 'application/json'},
-//             body: JSON.stringify({
-//                 'todoIdFromJSFile': todoId
-//             })
-//         })
-//         const data = await response.json()
-//         console.log(data)
-//         location.reload()
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
-
-// async function markIncomplete(){
-//     const todoId = this.parentNode.dataset.id
-//     try{
-//         const response = await fetch('todos/markIncomplete', {
-//             method: 'put',
-//             headers: {'Content-type': 'application/json'},
-//             body: JSON.stringify({
-//                 'todoIdFromJSFile': todoId
-//             })
-//         })
-//         const data = await response.json()
-//         console.log(data)
-//         location.reload()
-//     }catch(err){
-//         console.log(err)
-//     }
-// }
-
-
-
 //Calendar
 
 let nav = 0;
@@ -121,88 +48,97 @@ function openModal(date) {
 
 
 
-//Loads the page with the month
-// function page() {
-//     const today = new Date();
-//     console.log(today)
+// //Loads the page with the month
+function page() {
+    //Today's date
+    const today = new Date();
 
-//     if (nav !== 0) {
-//         today.setMonth(new Date().getMonth() + nav);
-//     }
+    if (nav !== 0) {
+        today.setMonth(new Date().getMonth() + nav);
+        console.log("TESTING THIS " + today.setMonth(new Date().getMonth() + nav))
+    }
 
-//     const month = today.getMonth()  //Gives you the month number
-//     const day = today.getDate() //Gives you the day number
-//     const year = today.getFullYear()    //Gives you the year 
+    const month = today.getMonth()  //Gives you the month number
+    const day = today.getDate() //Gives you the day number
+    const year = today.getFullYear()    //Gives you the year 
 
-//     const firstOfMonth = new Date(year, month, 1);  //Gives you the date. Ex: Sat Oct 01 2022 00:00:00 GMT-0700
-//     const fullDaysInMonth = new Date(year, month + 1, 0).getDate(); //Gives you the number of days in the month
+    const firstOfMonth = new Date(year, month, 1);  //Gives you the date. Ex: Sat Oct 01 2022 00:00:00 GMT-0700
+    const fullDaysInMonth = new Date(year, month + 1, 0).getDate(); //Gives you the number of days in the month
 
 //     // Gives you the day and date. Ex: Saturday, 10/1/2022
-//     const dateString = firstOfMonth.toLocaleDateString('en-us', {
-//         weekday: 'long',
-//         year: 'numeric',
-//         month: 'numeric',
-//         day: 'numeric',
-//     });
+    const dateString = firstOfMonth.toLocaleDateString('en-us', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    });
     
-
+let dayWithZ = 0;
 //     // Code test:
 //     // let idsDaysOfYear = []; 
 //     // idsDaysOfYear.push(`${year}-${month + 1}-${day}`);
 
-//     //Gives you the amount of days before the first day of the month on the first week
-//     const paddingDays = weekdays.indexOf(dateString.split(',')[0]);   
+    //Gives you the amount of days before the first day of the month on the first week
+    const paddingDays = weekdays.indexOf(dateString.split(',')[0]);   
     
-//     document.querySelector('.month').innerText = `${today.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
+    document.querySelector('.month').innerText = `${today.toLocaleDateString('en-us', {month: 'long'})} ${year}`;
 
-//     calendar.innerHTML = '';
+    calendar.innerHTML = '';
 
-//     for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) {
-//         const daySquare = document.createElement('div');
-//         daySquare.classList.add('day');
+    for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) {
+        const daySquare = document.createElement('div');
+        daySquare.classList.add('day');
 
-//         //dayString = xx/x/xxxx | Example: 10/-5/2022 and it goes up from there to 10/31/2022
-//         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
+        if (i -paddingDays < 10) {
+            dayWithZ = ('0' + (i - paddingDays)).slice(-2) 
+        }
+        daySquare.id = `${year}-${month+1}-${dayWithZ}`;
 
-//         if ( i > paddingDays) {
-//              daySquare.innerText = i - paddingDays;
-//              //eventForDay = today's date | Ex: 2002-10-1
-//              const eventForDay = events.find(e => e.date === dayString);
-//              console.log("eventForDay = "  + eventForDay)
+        //dayString = xx/x/xxxx | Example: 10/-5/2022 and it goes up from there to 10/31/2022
+        const dayString = `${month + 1}/${i - paddingDays}/${year}`;
 
-//             if (i - paddingDays === day && nav === 0) {
-//                  daySquare.id = 'currentDay';
-//             }
+        if ( i > paddingDays) {
+             daySquare.innerText = i - paddingDays;
+            //  Today's date | Ex: 2002-10-1
+             const eventForDay = events.find(e => e.date === dayString);
+             console.log("eventForDay = "  + eventForDay)
 
-//             if (eventForDay) {
-//                  const eventDiv = document.createElement('div');
-//                  eventDiv.classList.add('event');
-//                  eventDiv.innerText = eventForDay.title;
-//                  daySquare.appendChild(eventDiv);
-//             }
+            if (i - paddingDays === day && nav === 0) {
+                 daySquare.id = 'currentDay';
+            }
 
-//             daySquare.addEventListener('click', () => openModal(dayString))
+            if (eventForDay) {
+                 const eventDiv = document.createElement('div');
+                 eventDiv.classList.add('event');
+                 eventDiv.innerText = eventForDay.title;
+                 daySquare.appendChild(eventDiv);
+            }
+            daySquare.addEventListener('click', () => openModal(dayString))
+            } else {
+            //   daySquare.classList.add('padding');
+            }
+            calendar.appendChild(daySquare)
+        }
 
-//         } else {
-//               daySquare.classList.add('padding');
-//         }
-
-//          calendar.appendChild(daySquare)
-//         }
-
-// }
+}
 
 
-const today = new Date();
+const today = new Date(); //Today's date
 const month = today.getMonth()  //Gives you the month number
 let day = today.getDate() //Gives you the day number
+let monthOne = month + 1;
 if (day < 10) {
     day = ('0' + day).slice(-2) 
 }
-const year = today.getFullYear()    //Gives you the year 
 
-let formatDate = `${year}-${month + 1}-${day}`
-console.log(formatDate);
+if (monthOne < 10) {
+    monthOne = ('0' + monthOne).slice(-2)
+}
+
+const year = today.getFullYear()    //Gives you the year | Ex: 2022
+
+let formatDate =`${year}-${monthOne}-${day}`
+console.log("formatDate= " + formatDate);
 
 //Date value
 const setDate = document.querySelector('#date')
@@ -285,7 +221,7 @@ function initButtons() {
 
     document.getElementById('forward-month').addEventListener('click', () => {
         nav++;
-        page();
+         page();
     })
 
     document.getElementById('saveButton').addEventListener('click', saveEvent)
@@ -297,7 +233,7 @@ function initButtons() {
     
 }
 
-// page()
+page()
 initButtons()
 
 
@@ -312,7 +248,7 @@ initButtons()
 
 
 // function fetchData() {
-//     fetch('/')
+//     fetch('/events')
 //     .then(res => res.json())
 //     .then(data => {
 //         data.forEach(entry => {
@@ -329,3 +265,31 @@ initButtons()
 // }
 
 // fetchData()
+
+
+// Was testing this out for button click on ejs to change month up
+// function changeUp(nav) {
+
+//     console.log('change Month')
+//     async function changeMonthOne(nav){
+//         // const todoId = this.parentNode.dataset.id
+//             // const eventId = this.parentNode.dataset.date
+//             // console.log(eventId)
+//         try{
+//             const response = await fetch('/changeUp', {
+//                 method: 'POST',
+//                 headers: {'Content-type': 'application/json'},
+//                 body: JSON.stringify({ 
+//                     nav: nav
+//                 })
+//             })
+//             const data = await response.json()
+//             console.log(data)
+//             location.reload()
+//         }catch(err){
+//             console.log(err)
+//         }
+//     }
+
+//     changeMonthOne(nav)
+// }

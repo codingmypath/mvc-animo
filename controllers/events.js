@@ -36,7 +36,17 @@ module.exports = {
             console.log(err)
         }
     }
-
+    // changeEvent: async (req, res)=>{
+    //     try{
+    //         console.log(req.body.eventId)
+    //         const changeMonth = req.body.nav
+    //         app.locals.nav = changeMonth
+    //         console.log('Changed Month')
+    //         res.json('Changed It')
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // }
 }    
 
 
