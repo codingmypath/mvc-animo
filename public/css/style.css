@@ -326,17 +326,17 @@ li {
 }
 
 
-.neutral {
+.good {
     background: red;
     color: red;
 }
 
-.positive {
+.meh {
     background: red;
     color: red;
 }
 
-.negative {
+.bad {
     background: red;
     color: red;
     font-size: 10px;

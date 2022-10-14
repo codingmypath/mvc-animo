@@ -50,20 +50,20 @@
 
     <% let dayStringTest = [] %>
     
-    <% for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) { %>
+    <%# for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) { %>
         <%# const daySquare = document.createElement('div'); %>
         <%# daySquare.classList.add('day'); %>
 
-        <% const dayString = `${month + 1}/${i - paddingDays}/${year}`; %>
+        <%# const dayString = `${month + 1}/${i - paddingDays}/${year}`; %>
 
         <%# ADD ZERO IN FRONT OF A SINGLE NUMBER DATE TO BE THE SAME AS DATABASE DATE %>
-        <% if (i - paddingDays < 10) { %>
-            <%  dayWithZero = ('0' + (i - paddingDays)).slice(-2) %>
-        <% } else { %>
-            <%  dayWithZero = i - paddingDays; %>
-        <% } %>
+        <%# if (i - paddingDays < 10) { %>
+            <%#  dayWithZero = ('0' + (i - paddingDays)).slice(-2) %>
+        <%# } else { %>
+            <%#  dayWithZero = i - paddingDays; %>
+        <%# } %>
     
-        <% dayStringTest.push(`${year}-${month + 1}-${dayWithZero}`); %>
+        <%# dayStringTest.push(`${year}-${month + 1}-${dayWithZero}`); %>
 
         <%# if ( i > paddingDays) { %>
             <%# daySquare.innerText = i - paddingDays; %>
@@ -78,7 +78,7 @@
                 <%# eventDiv.classList.add('event'); %>
                 <%# eventDiv.innerText = eventForDay.title; %>
                 <%# daySquare.appendChild(eventDiv); %>
-        <% } %>
+        <%# } %>
 
                 <%# daySquare.addEventListener('click', () => openModal(dayString)) %>
             <%# } else { %>
@@ -128,11 +128,17 @@
             <li>Friday</li>
             <li>Saturday</li>
         </ul>
+
         
-        <% events.forEach(el  => { %>
         <section class="calendar"></section>
-        <div class="calendar"><div class="el.mood"></div><%= el.date %></div>
-        <% }) %>
+
+        <section class="test">
+            <% events.forEach(el => {  %>
+                <li class="date"><%= el.mood %></li>
+                <%  }) %>
+        </section>
+        
+        
         <!-- <a href="/logout">Logout</a> -->
     </section>
     

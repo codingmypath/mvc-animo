@@ -99,6 +99,7 @@ let dayWithZ = 0;
         }
         
 
+
         //dayString = xx/x/xxxx | Example: 10/-5/2022 and it goes up from there to 10/31/2022
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
 
@@ -124,7 +125,28 @@ let dayWithZ = 0;
             //   daySquare.classList.add('padding');
             }
             calendar.appendChild(daySquare)
+
         }
+        
+
+        // function fetchData() {
+        //     fetch('/events')
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         data.forEach(entry => {
+        //             // Add a class to to change color depending on the selected mood
+        //             if(entry.date === daySquare.id) {
+        //                 document.querySelector(`#${entry.date}`).classList.add('good');
+        //             } else if(entry.mood === 'meh') {
+        //                 document.querySelector(`#${entry.date}`).classList.add('meh');
+        //             } else if(entry.mood === 'bad') {
+        //                 document.querySelector(`#${entry.date}`).classList.add('bad');
+        //             }
+        //         })
+        //     })
+        // }
+        
+        // fetchData()
 
 }
 
@@ -257,27 +279,6 @@ initButtons()
 // }
 
 
-// function fetchData() {
-//     fetch('/events')
-//     .then(res => res.json())
-//     .then(data => {
-//         data.forEach(entry => {
-//             // Add a class to to change color depending on the selected mood
-//             if(entry.mood === 'good') {
-//                 document.querySelector(`#${entry.date}`).classList.add('good');
-//             } else if(entry.mood === 'meh') {
-//                 document.querySelector(`#${entry.date}`).classList.add('meh');
-//             } else if(entry.mood === 'bad') {
-//                 document.querySelector(`#${entry.date}`).classList.add('bad');
-//             }
-//         })
-//     })
-// }
-
-// fetchData()
-
-// fetchData()
-
 
 // Was testing this out for button click on ejs to change month up
 // function changeUp(nav) {
@@ -305,29 +306,3 @@ initButtons()
 
 //     changeMonthOne(nav)
 // }
-
-
-// function fetchData() {
-//     fetch('/events')
-//     .then(res => res.json())
-//     .then(data => {
-//         data.forEach(entry => {
-//             // Add a class to to change color depending on the selected mood
-//             if(entry.overallMood === 'good') {
-//                 document.querySelector(`#${entry.date}`).classList.add('good');
-//             } else if(entry.overallMood === 'meh') {
-//                 document.querySelector(`#${entry.date}`).classList.add('meh');
-//             } else if(entry.overallMood === 'bad') {
-//                 document.querySelector(`#${entry.date}`).classList.add('bad');
-//             }
-//             // NOTES
-//             // Show notes indicator if notes exists
-//             if(entry.events) {
-//                 // Add class to show styles if notes exists
-//                 document.querySelector(`#${entry.date} .notes-indicator`).classList.add('show')
-//             }
-//         })
-//     })
-// }
-
-// fetchData()
