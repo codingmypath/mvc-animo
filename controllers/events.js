@@ -3,7 +3,7 @@ const Event = require('../models/Event')
 module.exports = {
     getEvents: async (req,res) => {
         try{
-            const eventItems = await [].concat(Event.find())
+            const eventItems = await Event.find().lean()
             console.log("Results = " + eventItems)
             res.render('events.ejs', {events: eventItems})
         }catch(err){

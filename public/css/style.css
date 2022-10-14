@@ -428,3 +428,22 @@ nav {
 .author {
     text-align: right;
 }
+
+
+.social-links > i {
+    font-size: 2rem;
+    color: rgb(0, 183, 255);
+    padding: 0.5rem;
+}
+
+
+/* Resources */
+.resources {
+    margin-top: 80px;
+    width: 700px;
+    text-align: center;
+}
+
+.resource-title {
+    color:#00A8E9;
+}

@@ -89,19 +89,25 @@ let dayWithZ = 0;
         const daySquare = document.createElement('div');
         daySquare.classList.add('day');
 
+        //If day is only one digit, add a zero in the front of it. Else leave as is
         if (i -paddingDays < 10) {
             dayWithZ = ('0' + (i - paddingDays)).slice(-2) 
+            // console.log("dayWithZ = " + dayWithZ)
+            daySquare.id = `${year}-${month+1}-${dayWithZ}`;
+        } else {
+            daySquare.id = `${year}-${month+1}-${i-paddingDays}`;
         }
-        daySquare.id = `${year}-${month+1}-${dayWithZ}`;
+        
 
         //dayString = xx/x/xxxx | Example: 10/-5/2022 and it goes up from there to 10/31/2022
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
 
         if ( i > paddingDays) {
              daySquare.innerText = i - paddingDays;
+            //  console.log("daySquare =" + daySquare.innerText)
             //  Today's date | Ex: 2002-10-1
              const eventForDay = events.find(e => e.date === dayString);
-             console.log("eventForDay = "  + eventForDay)
+            //  console.log("eventForDay = "  + eventForDay)
 
             if (i - paddingDays === day && nav === 0) {
                  daySquare.id = 'currentDay';
@@ -143,8 +149,12 @@ console.log("formatDate= " + formatDate);
 //Date value
 const setDate = document.querySelector('#date')
 setDate.setAttribute('max', formatDate);
-setDate.setAttribute('value', formatDate);
+// setDate.setAttribute('value', formatDate); //formatDate is from today's date, not the date clicked
 
+//Gets the id from the button click
+document.addEventListener('click', function(e) {
+    setDate.setAttribute('value', e.target.id);
+}, false);
 
 
 //Closes the journal entry questionaire 
@@ -254,15 +264,17 @@ initButtons()
 //         data.forEach(entry => {
 //             // Add a class to to change color depending on the selected mood
 //             if(entry.mood === 'good') {
-//                 document.querySelector(`#date_${entry.date}`).classList.add('good');
+//                 document.querySelector(`#${entry.date}`).classList.add('good');
 //             } else if(entry.mood === 'meh') {
-//                 document.querySelector(`#date_${entry.date}`).classList.add('meh');
+//                 document.querySelector(`#${entry.date}`).classList.add('meh');
 //             } else if(entry.mood === 'bad') {
-//                 document.querySelector(`#date_${entry.date}`).classList.add('bad');
+//                 document.querySelector(`#${entry.date}`).classList.add('bad');
 //             }
 //         })
 //     })
 // }
+
+// fetchData()
 
 // fetchData()
 
@@ -293,3 +305,29 @@ initButtons()
 
 //     changeMonthOne(nav)
 // }
+
+
+// function fetchData() {
+//     fetch('/events')
+//     .then(res => res.json())
+//     .then(data => {
+//         data.forEach(entry => {
+//             // Add a class to to change color depending on the selected mood
+//             if(entry.overallMood === 'good') {
+//                 document.querySelector(`#${entry.date}`).classList.add('good');
+//             } else if(entry.overallMood === 'meh') {
+//                 document.querySelector(`#${entry.date}`).classList.add('meh');
+//             } else if(entry.overallMood === 'bad') {
+//                 document.querySelector(`#${entry.date}`).classList.add('bad');
+//             }
+//             // NOTES
+//             // Show notes indicator if notes exists
+//             if(entry.events) {
+//                 // Add class to show styles if notes exists
+//                 document.querySelector(`#${entry.date} .notes-indicator`).classList.add('show')
+//             }
+//         })
+//     })
+// }
+
+// fetchData()
