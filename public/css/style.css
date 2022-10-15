@@ -327,19 +327,18 @@ li {
 
 
 .good {
-    background: red;
-    color: red;
+    background: rgb(0, 156, 34);
+    color: rgb(0, 0, 0);
 }
 
 .meh {
-    background: red;
-    color: red;
+    background: rgb(59, 70, 109);
+    color: rgb(0, 0, 0);
 }
 
 .bad {
-    background: red;
-    color: red;
-    font-size: 10px;
+    background: rgb(134, 2, 2);
+    color: rgb(0, 0, 0);
 }
 
 /* nav bar  */
@@ -446,4 +445,27 @@ nav {
 
 .resource-title {
     color:#00A8E9;
+}
+
+/* Journal Entry Form */
+.title-form {
+    margin: 20px;
+}
+
+h3{
+    margin: 4px;
+}
+
+.title-label {
+    font-weight: bold;
+}
+
+.journal-button {
+    border: none;
+    cursor: pointer;
+    background:rgb(0, 183, 255);
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 2px;
 }

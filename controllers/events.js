@@ -10,6 +10,15 @@ module.exports = {
             console.log(err)
         }
     },
+    getEvent: async (req,res) => {
+        try{
+            const eventItems = await Event.find()
+            console.log("Results GetEvents = " + eventItems)
+            res.json(eventItems)
+        }catch(err){
+            console.log(err)
+        }
+    },
     createEvent: async (req, res)=>{
         try{
             await Event.create({

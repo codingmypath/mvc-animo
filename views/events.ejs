@@ -13,97 +13,23 @@
 </head>
 <body class="calendar-body">
 
-    <%# USED TO KEEP TRACK OF MONTH DISPLAY %> 
-    <% let nav = 0; %>
-    <% let clicked = null; %>
-
-    <% const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; %>
-
-
-        <%# TODAY'S DATE %> 
-        <% const today = new Date(); %>
-
-        <%# IF MONTH IS NOT THE CURRENT MONTH, IT UPDATES IT TO THE MONTH IT MOVED TO  %> 
-        <% if (nav !== 0) { %>
-            today.setMonth(new Date().getMonth() + nav);
-        <% } %>
-
-        <% const month = today.getMonth() %>
-        <% const day = today.getDate() %>
-        <% const year = today.getFullYear() %>
-
-        <% const firstOfMonth = new Date(year, month, 1); %>
-        <% const fullDaysInMonth = new Date(year, month + 1, 0).getDate(); %>
-
-        <% const dateString = firstOfMonth.toLocaleDateString('en-us', {
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'numeric', 
-            day: 'numeric', 
-        }); 
-        %>
-
-        <% const paddingDays = weekdays.indexOf(dateString.split(',')[0]); %>
-         
-
-
-
-    <% let dayStringTest = [] %>
-    
-    <%# for (let i = 1; i <= paddingDays + fullDaysInMonth; i++) { %>
-        <%# const daySquare = document.createElement('div'); %>
-        <%# daySquare.classList.add('day'); %>
-
-        <%# const dayString = `${month + 1}/${i - paddingDays}/${year}`; %>
-
-        <%# ADD ZERO IN FRONT OF A SINGLE NUMBER DATE TO BE THE SAME AS DATABASE DATE %>
-        <%# if (i - paddingDays < 10) { %>
-            <%#  dayWithZero = ('0' + (i - paddingDays)).slice(-2) %>
-        <%# } else { %>
-            <%#  dayWithZero = i - paddingDays; %>
-        <%# } %>
-    
-        <%# dayStringTest.push(`${year}-${month + 1}-${dayWithZero}`); %>
-
-        <%# if ( i > paddingDays) { %>
-            <%# daySquare.innerText = i - paddingDays; %>
-            <%# const eventForDay = events.find(e => e.date === dayString); %>
-
-            <%# if (i - paddingDays === day && nav === 0) { %>
-                <%# daySquare.id = 'currentDay'; %>
-            <%# } %>
-
-        <%# if (eventForDay) { %>
-                <%# const eventDiv = document.createElement('div'); %>
-                <%# eventDiv.classList.add('event'); %>
-                <%# eventDiv.innerText = eventForDay.title; %>
-                <%# daySquare.appendChild(eventDiv); %>
-        <%# } %>
-
-                <%# daySquare.addEventListener('click', () => openModal(dayString)) %>
-            <%# } else { %>
-                        <%# daySquare.classList.add('padding'); %>
-                        <%# } %>
-
-                        <%# calendar.appendChild(daySquare) %>
-                    <%# } %>
-
-        <%# let formatDate = `${year}-${month + 1}-${day}` %>
-        <%# console.log(formatDate); %>
-            
-            
-        <header>
-            <a class="header-links" href="/events"><img class="animo" src="images/animo-logo13.png"></a>
-            <nav>
-                <ul class="nav-ul">
-                    <li class="header-li"><a class="header-links" href="/events">Home</a></li>
-                    <li class="header-li"><a class="header-links" href="/resources">Resources</a></li>
-                    <!-- <li class="header-li"><a class="header-links" href="calendar.html">Feed</a></li> -->
-                    <!-- <li class="header-li"><a class="header-links" href="calendar.html">About Us</a></li> -->
-                    <li class="header-li"><a class="header-links" href="/logout">Logout</a></li>
-                </ul>
-            </nav>
-        </header>
+    <!-- for the client side javascript -->
+    <script> 
+        let arr = <%- JSON.stringify(events); %>
+    </script>
+                  
+    <header>
+        <a class="header-links" href="/events"><img class="animo" src="images/animo-logo13.png"></a>
+        <nav>
+            <ul class="nav-ul">
+                <li class="header-li"><a class="header-links" href="/events">Home</a></li>
+                <li class="header-li"><a class="header-links" href="/resources">Resources</a></li>
+                <!-- <li class="header-li"><a class="header-links" href="calendar.html">Feed</a></li> -->
+                <!-- <li class="header-li"><a class="header-links" href="calendar.html">About Us</a></li> -->
+                <li class="header-li"><a class="header-links" href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <section class="container">
 
@@ -133,20 +59,20 @@
         <section class="calendar"></section>
 
         <section class="test">
-            <% events.forEach(el => {  %>
-                <li class="date"><%= el.mood %></li>
-                <%  }) %>
+            <%# events.forEach(el => {  %>
+                <!-- <li class="date"><%# el.mood %> <%# el.date %></li> -->
+                <%#  }) %>
         </section>
-        
-        
+         
         <!-- <a href="/logout">Logout</a> -->
     </section>
     
     <form id="newEventModal" action="/events/createEvent" method='POST'>
         <h2>Journal Entry</h2>
+        <h3>Date</h3>
         <input id="date" class="block" type="date" value="" name="date" min="2022-01-01" max="" required>
-        <div>
-            <label for="title">Title</label>
+        <div class="title-form">
+            <label class="title-label" for="title">Title</label>
             <input type="text" name="title" id="eventTitleInput" placeholder="Title info" required>
         </div>
         <h3>How was your day?</h3>
@@ -154,10 +80,10 @@
         <input id="mood" type="radio" name="mood" value="meh"> Meh
         <input id="mood" type="radio" name="mood" value="bad"> Bad
         <h3>What happened today?</h3>
-        <textarea id="description" placeholder="Today.." name="description" rows="0" cols="0" required="required"></textarea><br>
-        <button type="submit" id="saveButton">Submit</button>
-        <button id="deleteButton" class="del">Delete</button>
-        <input type="button" id="cancelButton" class="del" value="Cancel">
+        <textarea id="description" placeholder="Today.." name="description" rows="5" cols="25" required="required"></textarea><br>
+        <button class="journal-button" type="submit" id="saveButton">Submit</button>
+        <button class="journal-button" id="deleteButton" class="del">Delete</button>
+        <button type="button" id="cancelButton" class="del journal-button" value="Cancel">Cancel</button>
     </form>
     <div id="deleteEventModal">
         <h2>Event</h2>
