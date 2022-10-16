@@ -55,8 +55,9 @@ function page() {
     console.log("NAVVVVVVVV= " + nav)
     if (nav !== 0) {
         today.setMonth(new Date().getMonth() + nav);
-        console.log("TESTING THIS " + today.setMonth(new Date().getMonth() + nav))
+        // console.log("TESTING THIS " + today.setMonth(new Date().getMonth() + nav))
     }
+
 
     const month = today.getMonth()  //Gives you the month number
     const day = today.getDate() //Gives you the day number
@@ -65,6 +66,7 @@ function page() {
 
     const firstOfMonth = new Date(year, month, 1);  //Gives you the date. Ex: Sat Oct 01 2022 00:00:00 GMT-0700
     const fullDaysInMonth = new Date(year, month + 1, 0).getDate(); //Gives you the number of days in the month
+    console.log("firstOfMOnth= " + firstOfMonth)
 
     // Gives you the day and date. Ex: Saturday, 10/1/2022
     const dateString = firstOfMonth.toLocaleDateString('en-us', {
@@ -152,7 +154,6 @@ function page() {
         calendar.appendChild(daySquare)
 
 
-
         // console.log("ARR= " + arr)
         for (let j = 0 ; j < arr.length; j++) {
             // console.log(arr[j].mood)
@@ -179,10 +180,7 @@ function page() {
         console.log(arr.length)
 
     }
-        
-
-
-
+    
         // var json = JSON.parse(arr);
         // console.log("IDK = " + json)
 
@@ -225,7 +223,6 @@ setDate.setAttribute('max', formatDate);
 document.addEventListener('click', function(e) {
     setDate.setAttribute('value', e.target.id.replace('date_', '')); //used replace method to remove the "date_" part of the ID
 }, false);
-
 
 
 
