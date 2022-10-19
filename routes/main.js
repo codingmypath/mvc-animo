@@ -3,6 +3,7 @@ const router = express.Router()
 const authController = require('../controllers/auth') 
 const homeController = require('../controllers/home')
 const resourcesController = require('../controllers/resources')
+const copingController = require('../controllers/coping')
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
 router.get('/', homeController.getIndex)
@@ -13,5 +14,6 @@ router.get('/signup', authController.getSignup)
 router.post('/signup', authController.postSignup)
 
 router.get('/resources', resourcesController.getResources)
+router.get('/coping', copingController.getCoping)
 
 module.exports = router
