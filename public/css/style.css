@@ -222,7 +222,7 @@ li {
 
 /* Random Quote */
 .quote {
-    padding: 1rem;
+    padding: 2rem;
     color: white;
     margin: auto;
     text-align: center;
@@ -332,17 +332,17 @@ li {
 
 
 .good {
-    background: rgb(0, 156, 34);
+    background: rgb(2, 151, 35);
     color: white;
 }
 
 .meh {
-    background: rgba(204, 201, 37, 0.774);
+    background: rgb(180, 177, 0);
     color: white;
 }
 
 .bad {
-    background: rgb(134, 2, 2);
+    background: rgb(119, 2, 2);
     color: white;
 }
 
@@ -425,7 +425,7 @@ nav {
 
 /* Random Quote */
 .quote {
-    padding: 1rem;
+    padding: 1rem 2rem;
     color: white;
     margin: auto;
     text-align: center;
@@ -463,6 +463,7 @@ nav {
 
 .resource-title {
     color:#00A8E9;
+    padding-top: 15px;
 }
 
 .resource-numbers {
