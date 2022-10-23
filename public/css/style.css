@@ -7,7 +7,7 @@
 body {
     margin: 0;
     background-image: linear-gradient(
-        rgba(1, 44, 75, 0.85), 
+        rgba(0, 126, 167, 0.85), 
         rgba(1, 44, 90, 0.85)
     ),
     url('../images/test.jpg');
@@ -35,15 +35,12 @@ body {
     margin: 200px auto;
     color: white;
     height: 450px;
-    background: linear-gradient(
+    /* background: linear-gradient(
         rgba(1, 44, 75, 0.55), 
         rgba(90, 90, 90, 0.15)
     ),
-    #00171F;
-}
-
-
-.login-page {
+    #00171E; */
+    background: #003459;
     padding-top: 25px;
 }
 
@@ -84,11 +81,11 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-top: 10px;
 }
 
 .submit-button:hover {
-    background: black;
-    color:#00A8E9;
+    border-radius: 15px;
 }
 
 input {
@@ -99,22 +96,25 @@ input {
 
 .input {
     color: white;
-    border: 1px solid rgba(92, 92, 92, 0.562);
+    border: 1px solid rgba(0, 168, 233, 0.562);
     background: linear-gradient(
-        rgba(4, 64, 107, 0.55), 
-        rgba(4, 64, 107, 0.55)
+        rgba(0, 64, 107, 0.55), 
+        rgba(0, 64, 107, 0.55)
     ),
-    #005470;
+    #007EA7;
     padding: 5px;
 }
 
 .submit-button {
+    font-size: 17px;
     background: #00A8E9;
     border: none;
     /* border-radius: 50px; */
     padding: 5px;
     margin: 2px 0;
     cursor: pointer;
+    border: 2.5px solid;
+    font-weight: 500;
 }
 
 .signup-button {
@@ -126,23 +126,44 @@ input {
     text-decoration: none;
 }
 
-.link-signup {
+
+/* .link-signup {
     background:#00A8E9;
     color: white;
+    border: none;
     text-decoration: none;
-    border-radius: 2px;
-    padding: 5px;
+    border-radius: 10px;
+    padding: 12px;
     font-family: 'Baloo 2', 'Times New Roman', Times, serif;
+    cursor: pointer;
 }
+
 
 .link-signup:hover {
     background: black;
     color:#00A8E9;
-}
+} */
+
+button {
+    font-size: 17px;
+    color: white;
+    height: 45px;
+    width: 100px;
+    border: 1.5px solid #00171E;
+    transition: 0.3s all;
+    background-image: linear-gradient(45deg,#00A8E9,#00A8E9,#00A8E9,#00A8E9,#00A8E9);
+    font-weight: 500;
+   }
+   
+   button:hover {
+    background-color: #00A8E9;
+    border-radius: 30px;
+    cursor: pointer;
+   }
+   
 
 .p-login {
     margin-top: 40px;
-
 }
 
 /* Home */
@@ -155,8 +176,11 @@ input {
     margin: auto;
     color: white;
     margin: 100px;
-    padding: 50px;
+    margin-top: 80px;
+    padding: 30px;
+    margin-bottom: 180px;
 }
+
 
 .month {
     text-align: center;
@@ -232,7 +256,7 @@ li {
         rgba(90, 90, 90, 0.15)
     ),
     #00171F; */
-    background:#00171E
+    background: #003459;
 }
 
 .author {
@@ -281,17 +305,22 @@ li {
 }
 
 #newEventModal {
+    color: white;
     margin-top: 405px;
     position: absolute;
-    background: rgb(255, 255, 255);
+    background: #003459;
     width: 550px;
     height: 500px;
     display: none;
     z-index: 1;
     border-radius: 5px;
     text-align: center;
+    padding: 15px;
 }
 
+#journal-today {
+    padding-top: 25px;
+}
 
 #deleteEventModal {
     margin-top: 45px;
@@ -396,11 +425,6 @@ nav {
     height: 35px;
 }
 
-.container {
-    margin-top: 80px;
-    padding: 30px;
-    margin-bottom: 180px;
-}
 
 
 /* FOOTER */
@@ -430,11 +454,11 @@ nav {
     margin: auto;
     text-align: center;
     max-width: 725px;
-    background: linear-gradient(
+    /* background: linear-gradient(
         rgba(1, 44, 75, 0.15), 
         rgba(1, 40, 90, 0.15)
     ),
-    #00171F;
+    #00171F; */
     margin-bottom: 50px;
 }
 
@@ -450,7 +474,7 @@ nav {
 }
 
 .social-links>i:hover {
-    color: rgba(255, 255, 255, 0.555);
+    color: white;
 }
 
 
@@ -484,13 +508,12 @@ h3{
 }
 
 .journal-button {
-    border: none;
+    font-size: 17px;
     cursor: pointer;
     background:rgb(0, 183, 255);
-    color: black;
     border-radius: 5px;
     padding: 5px;
-    margin: 2px;
+    margin: 5px;
 }
 
 

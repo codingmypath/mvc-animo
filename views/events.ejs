@@ -75,14 +75,14 @@
         <input id="date" class="block" type="date" value="" name="date" min="2022-01-01" max="" required>
         <div class="title-form">
             <label class="title-label" for="title">Title</label>
-            <input type="text" name="title" id="eventTitleInput" placeholder="Title" required>
+            <input class="input" type="text" name="title" id="eventTitleInput" placeholder="Title" required>
         </div>
         <h3>How was your day?</h3>
-        <input id="mood" type="radio" name="mood" value="good" required> Good 
-        <input id="mood" type="radio" name="mood" value="meh"> Meh
-        <input id="mood" type="radio" name="mood" value="bad"> Bad
-        <h3>What happened today?</h3>
-        <textarea id="description" placeholder="Today.." name="description" rows="5" cols="35" required="required"></textarea><br>
+        <input class="input" id="mood" type="radio" name="mood" value="good" required> Good 
+        <input class="input" id="mood" type="radio" name="mood" value="meh"> Meh
+        <input class="input" id="mood" type="radio" name="mood" value="bad"> Bad
+        <h3 id="journal-today">What happened today?</h3>
+        <textarea class="input" id="description" placeholder="Today.." name="description" rows="5" cols="35" required="required"></textarea><br>
         <button class="journal-button" type="submit" id="saveButton">Submit</button>
         <button class="journal-button" id="deleteButton" class="del">Delete</button>
         <button type="button" id="cancelButton" class="del journal-button" value="Cancel">Cancel</button>
