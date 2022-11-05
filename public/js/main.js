@@ -1,6 +1,6 @@
 //Calendar
 
-let nav = 0;
+let nav = 0; //Used for the current month
 let clicked = null;
 let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
 
@@ -13,18 +13,6 @@ const eventTitleInput = document.getElementById('eventTitleInput')
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const deleteBtn = document.querySelector('.del')
 
-//Testing this out for pop up box
-const dayPop = document.querySelectorAll('.day')
-
-dayPop.forEach(box => box.addEventListener('click', () => {
-    // The date from the box's id | Ex'date_' + YYYY-MM-DD
-    let idSquareClicked = box.id.slice(5)
-    console.log("idSquareClicked =" + idSquareClicked)
-    // set the value of date picker to the date clicked
-    setDate.setAttribute('value', idSquareClicked);
-    openModal()
-
-}))
 
 
 // Opens the journal entry questionaire
@@ -33,6 +21,38 @@ function openModal(date) {
 
     let events = localStorage.getItem('events') ? JSON.parse(localStorage.getItem('events')) : [];
     const eventForDay = events.find(e => e.date === clicked);
+    console.log("DATE:" + date)
+
+    const setDate = document.querySelector('#date')
+    setDate.setAttribute('max', formatDate);
+
+    //FORMAT DATE FOR DATE FORM!
+    let arrDate = date.split("/")
+    let currMonth = arrDate[0];
+    let currDay = arrDate[1];
+    let currYear = arrDate[2];
+    
+    if (currDay < 10) {
+        currDay = '0' + currDay;
+    }
+    
+    let formDate = `${currYear}-${currMonth}-${currDay}`
+    setDate.setAttribute('value', formDate)
+
+    console.log("DATE!")
+
+    console.log("currMonth! " + currMonth)
+    console.log("currDay! " + currDay)
+    console.log("currYear! " + currYear)
+
+    //Find way to open the delete window
+    // if (clicked) {
+    //     if (document.querySelector('.calendar > .meh') !== null) {
+    //     console.log('✅ element has child with id of child-3');
+    //     deleteEventModal.style.display = 'block';
+    //     }
+    // }
+
 
     if (eventForDay) {
         console.log('Event already exists');
@@ -52,7 +72,7 @@ function openModal(date) {
 function page() {
     //Today's date
     const today = new Date();
-    console.log("NAVVVVVVVV= " + nav)
+    
     if (nav !== 0) {
         today.setMonth(new Date().getMonth() + nav);
         // console.log("TESTING THIS " + today.setMonth(new Date().getMonth() + nav))
@@ -62,11 +82,9 @@ function page() {
     const month = today.getMonth()  //Gives you the month number
     const day = today.getDate() //Gives you the day number
     const year = today.getFullYear()    //Gives you the year 
-    console.log("YEEEEEAAAAAAARRRRR= " + year)
 
-    const firstOfMonth = new Date(year, month, 1);  //Gives you the date. Ex: Sat Oct 01 2022 00:00:00 GMT-0700
+    const firstOfMonth = new Date(year, month, 1);  //Gives you the date. Ex: Sat Oct 01 2022 00:00:00 GMT-0700 (Pacific Daylight Time)
     const fullDaysInMonth = new Date(year, month + 1, 0).getDate(); //Gives you the number of days in the month
-    console.log("firstOfMOnth= " + firstOfMonth)
 
     // Gives you the day and date. Ex: Saturday, 10/1/2022
     const dateString = firstOfMonth.toLocaleDateString('en-us', {
@@ -125,16 +143,16 @@ function page() {
 
         //dayString = xx/x/xxxx | Example: 10/-5/2022 and it goes up from there to 10/31/2022
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-        console.log("dayString=" + dayString)
-        console.log("dayWithZ=" + dayWithZ)
-        console.log("monthWithZ=" + monthWithZ)
+        // console.log("dayString=" + dayString)
+        // console.log("dayWithZ=" + dayWithZ)
+        // console.log("monthWithZ=" + monthWithZ)
         // console.log(typeof dayString);
 
         if ( i > paddingDays) {
-             daySquare.innerText = i - paddingDays;
+            daySquare.innerText = i - paddingDays;
             //  console.log("daySquare =" + daySquare.innerText)
             //  Today's date | Ex: 2002-10-1
-             const eventForDay = events.find(e => e.date === dayString);
+            const eventForDay = events.find(e => e.date === dayString);
             //  console.log("eventForDay = "  + eventForDay)
 
             if (i - paddingDays === day && nav === 0) {
@@ -164,14 +182,14 @@ function page() {
                 console.log("IFFFFFFF")
                 console.log("dayString... =" + dayStringTest)
                 if (arr[j].mood === 'good') {
-                document.querySelector(`#date_${dayStringTest}`).classList.add('good');
-                console.log("GOOOOOOOOOODDDDD")
+                    document.querySelector(`#date_${dayStringTest}`).classList.add('good');
+                    console.log("GOOOOOOOOOODDDDD")
                 } if (arr[j].mood === 'meh') {
-                console.log("MEEEEEEEEEEHHHH")
-                document.querySelector(`#date_${dayStringTest}`).classList.add('meh');
+                    console.log("MEEEEEEEEEEHHHH")
+                    document.querySelector(`#date_${dayStringTest}`).classList.add('meh');
                 } if (arr[j].mood === 'bad') {
-                console.log("BAAAAAAAAAAAD")
-                document.querySelector(`#date_${dayStringTest}`).classList.add('bad');
+                    console.log("BAAAAAAAAAAAD")
+                    document.querySelector(`#date_${dayStringTest}`).classList.add('bad');
                 }
             }
         }
@@ -212,17 +230,16 @@ if (monthOne < 10) {
 const year = today.getFullYear()    //Gives you the year | Ex: 2022
 
 let formatDate =`${year}-${monthOne}-${day}`
-console.log("formatDate= " + formatDate);
 
 //Date value
-const setDate = document.querySelector('#date')
-setDate.setAttribute('max', formatDate);
+// const setDate = document.querySelector('#date')
+// setDate.setAttribute('max', formatDate);
 // setDate.setAttribute('value', formatDate); //formatDate is from today's date, not the date clicked
 
 //Gets the id from the button click
-document.addEventListener('click', function(e) {
-    setDate.setAttribute('value', e.target.id.replace('date_', '')); //used replace method to remove the "date_" part of the ID
-}, false);
+// document.addEventListener('click', function(e) {
+//     setDate.setAttribute('value', e.target.id.replace('date_', '')); //used replace method to remove the "date_" part of the ID
+// }, false);
 
 
 
@@ -242,13 +259,7 @@ function saveEvent() {
     //Saves to local storage
     if (eventTitleInput.value) {
         eventTitleInput.classList.remove('error')
-        // events.push({
-        //     title: eventTitleInput.value,
-        //     date: clicked,
-        //     mood: document.querySelector('input[name="mood"]:checked').value
-        // })
-
-        // localStorage.setItem('events', JSON.stringify(events))
+        
         closeModal()
     } else {
         eventTitleInput.classList.add('error')
@@ -313,12 +324,3 @@ function initButtons() {
 page()
 initButtons()
 
-
-// //Calendar form
-// let form = document.getElementById('form');
-// form.addEventListener('submit', showMessage);
-
-// function showMessage(event) {
-//   alert("Your response has been recorded. (Not actually, this is just a demo!)");
-//   event.preventDefault();
-// }
