@@ -18,14 +18,6 @@ body {
     position: relative;
 }
 
-.container {
-    /* background: linear-gradient(
-        rgba(1, 44, 75, 0.55), 
-        rgba(90, 90, 90, 0.15)
-    ),
-    #00171F; */
-    /* background:#00171E; */
-}
 
 .login-page {
     margin: 500px;
