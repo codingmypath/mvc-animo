@@ -15,6 +15,8 @@ const deleteBtn = document.querySelector('.del')
 
 
 
+
+
 // Opens the journal entry questionaire
 function openModal(date) {
     clicked = date;
@@ -24,6 +26,14 @@ function openModal(date) {
     console.log("DATE:" + date)
 
     const setDate = document.querySelector('#date')
+
+    // let dateValue = document.getElementById('date').value;
+    // if (dateValue) {
+    //     setDate = document.querySelector('.date')
+    // } else {
+    //     setDate = document.querySelector('.date2')
+    // }
+
     setDate.setAttribute('max', formatDate);
 
     //FORMAT DATE FOR DATE FORM!
@@ -34,6 +44,10 @@ function openModal(date) {
     
     if (currDay < 10) {
         currDay = '0' + currDay;
+    }
+
+    if (currMonth < 10) {
+        currMonth = '0' + currMonth;
     }
     
     let formDate = `${currYear}-${currMonth}-${currDay}`
@@ -54,15 +68,152 @@ function openModal(date) {
     // }
 
 
-    if (eventForDay) {
-        console.log('Event already exists');
-        document.getElementById('eventText').innerText = eventForDay.title;
-        deleteEventModal.style.display = 'block';
-    } else {
-        console.log('ADD')
-        newEventModal.style.display = 'block';
-        // window.location.href="questions.html" //to go to new page
+    // // //TESTING THIS OUT
+    // for (let i = 0; i < arr.length; i++) {
+    //     // console.log("DATE " + date)
+    //     // console.log("arr[i].date " + arr[i].date)
+    //     if (formDate === arr[i].date) {
+    //         setDate.setAttribute('value', formDate)
+    //         console.log('Event already exists');
+    //         console.log('FORMDATE ' + formDate);
+    //         // document.getElementById('eventText').innerText = eventForDay.title;
+    //         deleteEventModal.style.display = 'block';
+    //         break;
+    //     } else {
+    //         setDate.setAttribute('value', formDate)
+    //         console.log('ADD');
+    //         newEventModal.style.display = 'block';
+    //         // window.location.href="questions.html" //to go to new page
+    //     }
+    // }
+
+    
+    // GETS CURRENT DATE (JUST TESTED THIS)
+    // document.getElementById('date').valueAsDate = new Date();
+
+    
+    // let searchDates = function(selectedDate) {
+    //     let found = false;
+    //     let foundkey = "";
+
+    //     for (let key in arr) {
+    //         if (selectedDate === arr[key].date) {
+    //             found = true;
+    //             foundkey = true;
+    //             break;
+    //           }
+    //     }
+      
+    //     if(found) {
+    //         // document.getElementById('date').value = formDate;
+    //         // setDate.setAttribute('value', formDate)
+    //         console.log('Event already exists');
+    //         // document.getElementById('eventText').innerText = eventForDay.title;
+    //         deleteEventModal.style.display = 'block';
+    //         // newEventModal.style.display = 'block';
+    //     } else {
+    //         // setDate.setAttribute('value', formDate)
+    //         console.log('ADD');
+    //         newEventModal.style.display = 'block';
+    //     }
+
+    // }
+
+
+    // searchDates(formDate);
+
+
+    //TESTING WITH ES6
+    // console.log("ARR " + arr.date)
+    // if (arr.includes(formDate)) {
+    //     newEventModal.style.display ='none';
+    //     console.log("ARR " + arr[i].date)
+    //     setDate.setAttribute('value', formDate)
+    //     console.log('Event already exists');
+    //     deleteEventModal.style.display = 'block';
+    // }
+    // setDate.setAttribute('value', formDate)
+    // console.log('ADD');
+    // newEventModal.style.display = 'block';
+
+
+
+    // TESTING THIS WITH THE FUNCTION 11-23
+    let searchDates = function(selectedDate) {
+        let found = false;
+        let foundkey = "";
+
+        for (let key in arr) {
+            if (selectedDate === arr[key].date) {
+                found = true;
+                foundkey = true;
+                break;
+              }
+        }
+      
+        if(found) {
+            console.log('Event already exists');
+            document.getElementById('dateDisplay').innerText = date;
+            for (let i = 0; i < arr.length; i++) {
+                if (selectedDate === arr[i].date) {
+                    let els = document.querySelectorAll('#mood')
+                        for (let x = 0; x < els.length; x++) {
+                        els[x].style.display = 'none';
+                        }
+                    document.getElementById('moodShow').innerText = arr[i].mood;
+                    document.getElementById('journalShow').innerText = arr[i].description;
+                    document.getElementById('titleShow').innerText = arr[i].title;
+                    console.log("CHECK ARR[i] " + arr[i].date)
+                }
+            }
+            document.getElementById('description').style.display = 'none';
+            document.getElementById('date').style.display = 'none';
+            document.getElementById('eventTitleInput').style.display = 'none';
+            newEventModal.style.display = 'block';
+        } else {
+            // setDate.setAttribute('value', formDate)
+            console.log('ADD');
+            let els = document.querySelectorAll('#mood')
+                for (let x = 0; x < els.length; x++) {
+                    els[x].style.display = 'inline';
+            }
+
+            newEventModal.style.display = 'block';
+            document.getElementById('moodShow').innerText = '';
+            document.getElementById('description').style.display = 'revert';
+            document.getElementById('journalShow').innerText = '';
+            document.getElementById('titleShow').innerText = '';
+            document.getElementById('eventTitleInput').style.display = 'revert';
+            document.getElementById('dateDisplay').innerText = '';
+            document.getElementById('date').style.display = 'revert';
+        }
     }
+
+    searchDates(formDate);
+
+
+
+    console.log('FormDate = ' + formDate)
+    // if (eventForDay) {
+    //     console.log('Event already exists');
+    //     document.getElementById('eventText').innerText = eventForDay.title;
+    //     deleteEventModal.style.display = 'block';
+    // } else {
+    //     console.log('ADD')
+    //     newEventModal.style.display = 'block';
+    //     for (let i = 0; i < arr.length; i++) {
+    //         if (formDate === arr[i].date) {
+    //             let els = document.querySelectorAll('#mood')
+    //             for (let x = 0; x < els.length; x++) {
+    //                 els[x].style.display = 'none';
+    //             }
+
+    //             document.getElementById('moodShow').innerText = arr[i].mood;
+    //             console.log("CHECK ARR[i] " + arr[i].date)
+    //         }
+    //     }
+    //     // window.location.href="questions.html" //to go to new page
+    // }
     backDrop.style.display = 'block';
 }
 
@@ -136,7 +287,7 @@ function page() {
             monthWithZ = month + 1;
         }
 
-        console.log("MONTH =" + monthWithZ)
+        // console.log("MONTH =" + monthWithZ) // EX: MONTH =11
         daySquare.id = `date_${year}-${monthWithZ}-${dayWithZ}`;
         dayStringTest = `${year}-${monthWithZ}-${dayWithZ}`;
 
@@ -195,7 +346,7 @@ function page() {
         }
 
         // arr.filter(x => x.id === 'good').map(x => x.mood);
-        console.log(arr.length)
+        // console.log(arr.length) EX: 8
 
     }
     
@@ -232,7 +383,23 @@ const year = today.getFullYear()    //Gives you the year | Ex: 2022
 let formatDate =`${year}-${monthOne}-${day}`
 
 //Date value
-// const setDate = document.querySelector('#date')
+// let setDate = document.querySelector('#date') || document.querySelector('#dateDelete')
+// setDate = document.querySelector('#dateDelete')
+// const setDate = document.querySelector('.date')
+let setDate = document.querySelector('.date')
+// let setDate = "";
+// let checkSetDate = document.querySelectorAll('.date')
+// console.log("CHECK LENGTH = " + checkSetDate.length)
+// console.log("CHECK 0 = " + checkSetDate[0])
+// console.log("CHECK 1 = " + checkSetDate[1])
+// if (checkSetDate[0]) {
+//     setDate = checkSetDate[0]
+// } else {
+//     setDate = checkSetDate[1]
+// }
+
+// const setDate = "";
+console.log("SETDATE " + setDate)
 // setDate.setAttribute('max', formatDate);
 // setDate.setAttribute('value', formatDate); //formatDate is from today's date, not the date clicked
 
@@ -240,6 +407,18 @@ let formatDate =`${year}-${monthOne}-${day}`
 // document.addEventListener('click', function(e) {
 //     setDate.setAttribute('value', e.target.id.replace('date_', '')); //used replace method to remove the "date_" part of the ID
 // }, false);
+
+
+
+//TESTING THIS OUT
+// let dateValue = document.getElementById('date').value;
+
+// if (dateValue) {
+//     setDate = document.querySelector('.date')
+// } else {
+//     setDate = document.querySelector('.date2')
+// }
+
 
 
 

@@ -56,43 +56,86 @@
             <li>Friday</li>
             <li>Saturday</li>
         </ul>
-
         
         <section class="calendar"></section>
+
+        <ul class="legend">
+            <li id="legendLi"><span class="legendOne"></span>
+            <span class="legend-label">Good</span></li>
+            <li id="legendLi"><span class="legendTwo"></span>
+                <span class="legend-label">Meh</span></li>
+            <li id="legendLi"><span class="legendThree"></span>
+                <span class="legend-label">Bad</span></li>
+        </ul>
         
-        <section class="test">
+        <!-- <section class="test">
             <%# events.forEach(el => {  %>
-                <!-- <li class="date"><%# el.mood %> <%# el.date %></li> -->
+                 <li class="date"><%# el.mood %> <%# el.date %></li>
                 <%#  }) %>
-        </section>
+        </section> -->
          
         <!-- <a href="/logout">Logout</a> -->
+
+
+        
     </section>
     
     <form id="newEventModal" action="/events/createEvent" method='POST'>
         <h2>Journal Entry</h2>
         <h3>Date</h3>
-        <input id="date" class="block" type="date" value="" name="date" min="2022-01-01" max="" required>
+        <p id="dateDisplay"></p>
+        <input id="date" class="block date" type="date" value="" name="date" min="2022-01-01" max=""  readonly required>
         <div class="title-form">
             <label class="title-label" for="title">Title</label>
+            <p id="titleShow"></p>
             <input class="input" type="text" name="title" id="eventTitleInput" placeholder="Title" required>
         </div>
         <h3>How was your day?</h3>
-        <input class="input" id="mood" type="radio" name="mood" value="good" required> Good 
-        <input class="input" id="mood" type="radio" name="mood" value="meh"> Meh
-        <input class="input" id="mood" type="radio" name="mood" value="bad"> Bad
+        
+        <section class="moodSection">
+            <label class="radioLabel">
+                <input class="input" id="mood" type="radio" name="mood" value="good" checked required>
+                <div class="radioButtons">
+                    <i class="fa-regular fa-face-smile face"></i>
+                </div>
+            </label>
+
+            <label class="radioLabel">
+                <input class="input" id="mood" type="radio" name="mood" value="meh">
+                <div class="radioButtons">
+                    <i class="fa-regular fa-face-meh face"></i>
+                </div>
+            </label>
+
+            <label class="radioLabel">
+                <input class="input" id="mood" type="radio" name="mood" value="bad">
+                <div class="radioButtons">
+                    <i class="fa-regular fa-face-frown face"></i>
+                </div>
+            </label>
+        </section>
+        
+        <p id="moodShow"></p>
         <h3 id="journal-today">What happened today?</h3>
-        <textarea class="input" id="description" placeholder="Today.." name="description" rows="5" cols="35" required="required"></textarea><br>
-        <button class="journal-button" type="submit" id="saveButton">Submit</button>
-        <button class="journal-button" id="deleteButton" class="del">Delete</button>
-        <button type="button" id="cancelButton" class="del journal-button" value="Cancel">Cancel</button>
+        <p id="journalShow"></p>
+        <div class="textbox-div">
+            <textarea class="input" id="description" placeholder="Today.." name="description" rows="5" cols="35" required="required"></textarea><br>
+        </div>
+        
+        <div class="button-div">
+            <button class="journal-button" type="submit" id="saveButton">Submit</button>
+            <button class="journal-button" id="deleteButton" class="del">Delete</button>
+            <button type="button" id="cancelButton" class="del journal-button" value="Cancel">Cancel</button>
+        </div>
     </form>
-    <div id="deleteEventModal">
+
+    <form id="deleteEventModal">
         <h2>Event</h2>
+        <input id="date" class="block date" type="date" value="" name="date" min="2022-01-01" max="" required>
         <p id="eventText"></p>
-        <button id="deleteButton" class="del">Delete</button>
+        <button class="journal-button" id="deleteButton" class="del">Delete</button>
         <button type="button" id="closeButton">Close</button>
-    </div> 
+    </form> 
     <div id="modalBackDrop"></div>
 
     <!-- <footer>

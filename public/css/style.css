@@ -84,9 +84,7 @@ h1 {
     margin-top: 10px;
 }
 
-.submit-button:hover {
-    border-radius: 15px;
-}
+
 
 input {
     font-size: 1rem;
@@ -106,14 +104,15 @@ input {
 }
 
 .submit-button {
+    color: white;
     font-size: 17px;
     background: #00A8E9;
     border: none;
-    /* border-radius: 50px; */
+    border-radius: 5px;
     padding: 5px;
     margin: 2px 0;
     cursor: pointer;
-    border: 2.5px solid;
+    border: none;
     font-weight: 500;
 }
 
@@ -149,16 +148,16 @@ button {
     color: white;
     height: 45px;
     width: 100px;
-    border: 1.5px solid #00171E;
-    transition: 0.3s all;
-    background-image: linear-gradient(45deg,#00A8E9,#00A8E9,#00A8E9,#00A8E9,#00A8E9);
     font-weight: 500;
+    border: none;
+    background-color: rgb(0, 183, 255);
+    border-radius: 5%;
    }
    
    button:hover {
     background-color: #00A8E9;
-    border-radius: 30px;
     cursor: pointer;
+    border: none;
    }
    
 
@@ -169,13 +168,14 @@ button {
 /* Home */
 .calendar-body {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    flex-direction: column;
 }
 .container {
     max-width: 800px;
     margin: auto;
     color: white;
-    margin: 100px;
+    margin: 100px auto;
     margin-top: 80px;
     padding: 30px;
     margin-bottom: 180px;
@@ -265,6 +265,41 @@ li {
 }
 
 
+/* Mood Legend Labels  */
+.legend {
+    padding-top: 10px;
+    padding-left: 250px;
+    display: flex;
+    justify-content: flex-end
+}
+
+.legendOne {
+    background-color: #92BADD;
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+}
+
+.legendTwo {
+    background-color: #4589C4;
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+}
+
+.legendThree {
+    background-color: #224A6D;
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+}
+
+#legendLi {
+    flex: none;
+    width: 75px;
+}
+
+
 /* Footer */
 /* footer {
     background: linear-gradient(
@@ -311,13 +346,17 @@ li {
     position: absolute;
     background: #003459;
     width: 550px;
-    height: 500px;
+    height: 585px;
     display: none;
     z-index: 1;
     border-radius: 5px;
     text-align: center;
     padding: 15px;
+    left: 0;
+    right: 0;
+    margin: 405px auto;
 }
+
 
 #journal-today {
     padding-top: 25px;
@@ -325,10 +364,12 @@ li {
 
 #deleteEventModal {
     margin-top: 45px;
+    margin-top: 405px;
     position: absolute;
-    background: rgb(255, 255, 255);
-    width: 550px;
-    height: 500px;
+    background: #003459;
+    color: white;
+    width: 580px;
+    height: 530px;
     display: none;
     z-index: 1;
     border-radius: 5px;
@@ -337,7 +378,7 @@ li {
 
 #currentDay {
     border: 2.5px solid rgb(0, 195, 255);
-    margin: 1px;
+    margin: 0px;
 }
 
 .event {
@@ -435,7 +476,7 @@ nav {
     background: #00171E;
     height: 180px;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0px;
     color: white;
     text-align: center;
@@ -462,6 +503,7 @@ nav {
     ),
     #00171F; */
     margin-bottom: 50px;
+    flex-grow: 1;
 }
 
 .author {
@@ -513,9 +555,10 @@ h3{
     font-size: 17px;
     cursor: pointer;
     background:rgb(0, 183, 255);
-    border-radius: 5px;
+    border-radius: 5%;
     padding: 5px;
     margin: 5px;
+    border-color: rgb(0, 183, 255);
 }
 
 
@@ -639,7 +682,7 @@ h3{
 
 
 .start {
-    background: #00171E;
+    background: #224A6D;
     align-items: center;
     justify-content: center;
     height: 300px;
@@ -660,4 +703,32 @@ h3{
     margin: 150px 0;
     color: white;
     padding: 50px 0;
+}
+
+
+/* Mood Radio Choices  */
+.radioLabel {
+    margin: 10px;
+}
+.fa-face-smile, .fa-face-frown, .fa-face-meh {
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.moodSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.radioLabel > input {
+    display: none !important;
+}
+
+.radioLabel input:checked + .radioButtons {
+    color: #00A8E9;
+}
+
+.face:hover {
+    color:grey;
 }
