@@ -18,8 +18,21 @@
     <script> 
         let arr = <%- JSON.stringify(events); %>
     </script>
+
+    <!-- <div class="menu-toggle">
+        <div class="hamburger">
+            <span></span>
+        </div>
+    </div> -->
                   
-    <header>
+    <header class="header">
+
+        <div class="menu-toggle">
+            <div class="hamburger">
+                <span></span>
+            </div>
+        </div>
+
         <a class="header-links" href="/events"><img class="animo" src="images/newbutterfly16.png"></a>
         <nav>
             <ul class="nav-ul">
@@ -31,6 +44,12 @@
                 <li class="header-li"><a class="header-links" href="/logout">Logout</a></li>
             </ul>
         </nav>
+
+        <!-- <div  class="menu-toggle">
+            <i class="fa fa-bars"></i>
+        </div> -->
+
+        
     </header>
 
     <section class="container">

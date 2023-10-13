@@ -13,6 +13,38 @@ const eventTitleInput = document.getElementById('eventTitleInput')
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const deleteBtn = document.querySelector('.del')
 
+//Mobile Menu
+// const menuToggle = document.querySelector('.menu-toggle');
+// const navbar = document.querySelector('.header');
+
+// menuToggle.addEventListener('click', () => {
+//     menuToggle.classList.toggle('is-active');
+//     navbar.classList.toggle('is-active')
+// })
+
+
+const hamburger = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-ul");
+
+hamburger.addEventListener("click", mobileMenu);
+
+function mobileMenu() {
+    hamburger.classList.toggle("is-active");
+    navMenu.classList.toggle("active");
+}
+
+
+// menuToggle.addEventListener('click', () => {
+
+//     let x = document.querySelector(".nav-ul");
+//     if (x.style.display === "block") {
+//       x.style.display = "none";
+//     } else {
+//       x.style.display = "block";
+//     }
+// })
+
+
 
 
 
