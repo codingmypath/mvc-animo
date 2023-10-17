@@ -33,16 +33,14 @@ function mobileMenu() {
     navMenu.classList.toggle("active");
 }
 
+//Close hamburger menu
+const navLink = document.querySelectorAll(".header-li");
+navLink.forEach(n => n.addEventListener("click", closeMenu));
 
-// menuToggle.addEventListener('click', () => {
-
-//     let x = document.querySelector(".nav-ul");
-//     if (x.style.display === "block") {
-//       x.style.display = "none";
-//     } else {
-//       x.style.display = "block";
-//     }
-// })
+function closeMenu() {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+}
 
 
 
