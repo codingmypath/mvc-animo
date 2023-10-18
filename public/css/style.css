@@ -7,8 +7,8 @@
 body {
     margin: 0;
     background-image: linear-gradient(
-        rgba(0, 126, 167, 0.85), 
-        rgba(3, 75, 153, 0.85)
+        rgb(184, 208, 227), 
+        rgb(70, 105, 143, 85%)
     ),
     url('../images/test.jpg');
     background-repeat: no-repeat;
@@ -852,6 +852,7 @@ h3{
     .nav-ul.active {
         left: 0;
         padding-left: 0;
+        z-index: 1;
     }
 
     .header-li {
@@ -866,8 +867,43 @@ h3{
     .header-li {
         width: 100%;
         margin: 1rem 0;
+        font-size: 14px;
     }
 
+    h1 {
+        margin-bottom: 1rem;
+    }
+
+
+    /* COPING SECTION */
+
+    .start {
+        margin-top: 69px;
+    }
+    .gradient-circle {
+        width: 300px;
+        height: 300px;
+        
+    }
+
+    .container-relax {
+        width: 280px;
+        height: 280px;
+    }
+
+    .footer {
+        font-size: 12px;
+    }
+
+    
+
+    .radioLabel {
+        font-size: 14px;
+    }
+
+    .journal-button {
+        font-size: 14px;
+    }
 
 }
 
